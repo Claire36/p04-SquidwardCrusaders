@@ -3,7 +3,7 @@
 
 Roster: 
 
-Claire Song
-Linda Zheng
-Tanzeem Hasan
+Claire Song\n
+Linda Zheng\n
+Tanzeem Hasan\n
 Ben Rudinski
