@@ -1,2 +1,8 @@
+claireS -- 2025-03-26 19:00
+- Completed project overview, list of program components, and site map
+
 tanzeemH -- 2025-03-27 04:53
 - Finished design.pdf component and database maps, uploaded to github
+
+claireS -- 2025-03-31 21:30
+- Updated site map
