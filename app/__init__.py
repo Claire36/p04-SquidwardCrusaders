@@ -25,6 +25,3 @@ def register():
         conn.close()
         return redirect('/login')
     return render_template('register.html')
-
-
-        
