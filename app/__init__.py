@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, url_for, request, redirect, session
 import sqlite3
 import hashlib
 
@@ -26,6 +26,20 @@ def register():
         return redirect('/login')
     return render_template('register.html')
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = hashlib.sha256(request.form['password'].encode()).hexdigest()
+        conn = get_db_connection()
+        user = conn.execute("SELECT * FROM users WHERE username = ? and password_hash = ?", (username, password)).fetchone()
+        conn.close()
+        if user:
+            session['user_id'] = user['id']
+            return redirect('/home')
+        return render_template('login.html')
+
+        
 if __name__ == "__main__":
 	app.run(host='0.0.0.0')
 
