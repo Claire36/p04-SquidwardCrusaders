@@ -9,3 +9,6 @@ claireS -- 2025-03-31 21:30
 
 tanzeemH -- 2025-03-31 23:10
 - Updated roles
+
+claireS -- 2025-04-01 23:02
+- Made homepage, added requirements.txt
