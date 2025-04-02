@@ -12,7 +12,7 @@ def get_db_connection():
 
 @app.route('/')
 def root():
-    return redirect('/login')
+    return render_template('home.html')
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -26,5 +26,6 @@ def register():
         return redirect('/login')
     return render_template('register.html')
 
+if __name__ == "__main__":
+	app.run(host='0.0.0.0')
 
-        
