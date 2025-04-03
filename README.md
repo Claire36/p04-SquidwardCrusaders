@@ -26,12 +26,12 @@ $ git clone git@github.com:Claire36/p04-SquidwardCrusaders.git
 ```
 $ cd p04-SquidwardCrusaders
 ```
-3. Create a virtual environment
+2. Create a virtual environment
 ```
 $ python3 -m venv foo
 ```
 
-4. Activate the virtual environment: Linux/MacOS
+3. Activate the virtual environment: Linux/MacOS
 ```
 $ . foo/bin/activate
 ```
