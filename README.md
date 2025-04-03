@@ -35,11 +35,11 @@ $ python3 -m venv foo
 ```
 $ . foo/bin/activate
 ```
-4. Activate the virtual environment: Windows
+3. Activate the virtual environment: Windows
 ```
 $ foo\Scripts\activate
 ```
-5. Install required packages
+4. Install required packages
 ```
 $ pip install -r requirements.txt
 ```
