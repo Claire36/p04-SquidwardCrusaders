@@ -18,3 +18,7 @@ claireS -- 2025-04-01 23:02
 
 benR -- 2025-04-02 00:28
 - Added login and register routes
+
+lindaZ -- 2025-04-03 10:44
+- Created testing droplet and added users
+- Working on chloropleth maps using d3
