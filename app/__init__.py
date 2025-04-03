@@ -14,6 +14,10 @@ def get_db_connection():
 def root():
     return render_template('home.html')
 
+@app.route('/test')
+def test():
+    return "<h1>Test</h1>"
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
