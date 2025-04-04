@@ -1,9 +1,15 @@
 from flask import Flask, render_template, url_for, request, redirect, session
 import sqlite3
 import hashlib
+import db
 
+DB_FILE = "db.py"
 app = Flask(__name__)
 app.secret_key = 'SquidwardT'
+
+db.setup()
+db.addCongestionOverall()
+print(db.getCongestionOverall())
 
 def get_db_connection():
     conn = sqlite3.connect('data.db')
