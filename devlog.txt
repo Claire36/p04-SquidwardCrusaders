@@ -22,3 +22,8 @@ benR -- 2025-04-02 00:28
 lindaZ -- 2025-04-03 10:44
 - Created testing droplet and added users
 - Working on chloropleth maps using d3
+
+benR -- 2025-04-07 20:05
+- Added simple logout routes
+- Added a map view route to see certain pollutants and to see specific database
+- Also utilized congestion api for congestion data

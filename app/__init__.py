@@ -46,9 +46,34 @@ def login():
         conn.close()
         if user:
             session['user_id'] = user['id']
-            return redirect('/home')
+            return redirect('/')
         return render_template('login.html')
 
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect('/login')
+
+@app.route('/map/<pollutant>')
+def map_view(pollutant):
+    return render_template('map.html', pollutant=pollutant)
+
+@app.route('/data/<pollutant>')
+def data_api(pollutant):
+    conn = get_db_connection()
+    data = conn.execute(
+        "SELECT year, state, value FROM airQuality WHERE pollutant = ? ORDER BY year",
+        (pollutant,)
+    ).fetchall()
+    conn.close()
+    return {'data': [dict(row) for row in data]}
+
+@app.route('/congestion_data')
+def congestion_api():
+    conn = get_db_connection()
+    data = conn.execute("SELECT year, state, congestion_index FROM congestion ORDER BY year").fetchall()
+    conn.close()
+    return {'data': [dict(row) for row in data]}
 
 if __name__ == "__main__":
 	app.run(host='0.0.0.0')
