@@ -27,3 +27,6 @@ benR -- 2025-04-07 20:05
 - Added simple logout routes
 - Added a map view route to see certain pollutants and to see specific database
 - Also utilized congestion api for congestion data
+
+lindaZ -- 2025-04-09 01:20
+- Able to deploy flask app on testing droplet
