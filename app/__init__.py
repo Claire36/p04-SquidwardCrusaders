@@ -2,14 +2,13 @@ from flask import Flask, render_template, url_for, request, redirect, session
 import sqlite3
 import hashlib
 import db
+import geopandas as gpd
+import json
+import matplotlib.pyplot as plt
 
 DB_FILE = "db.py"
 app = Flask(__name__)
 app.secret_key = 'SquidwardT'
-
-db.setup()
-db.addCongestionOverall()
-print(db.getCongestionOverall())
 
 def get_db_connection():
     conn = sqlite3.connect('data.db')
@@ -23,6 +22,22 @@ def root():
 @app.route('/map')
 def map():
     return render_template('map.html')
+
+@app.route('/test')
+def test_path():
+    with open('../counties.geojson', 'r') as f:
+        geojson_data = json.load(f)
+
+        # Convert the GeoJSON to a GeoDataFrame using GeoPandas
+        gdf = gpd.GeoDataFrame.from_features(geojson_data['features'])
+
+        # Check the first few rows to understand the structure
+        print(gdf.head())
+
+        # Optionally: Plot the GeoDataFrame
+        gdf.plot()
+        plt.show()
+    return render_template("test.html")
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -74,6 +89,9 @@ def congestion_api():
     data = conn.execute("SELECT year, state, congestion_index FROM congestion ORDER BY year").fetchall()
     conn.close()
     return {'data': [dict(row) for row in data]}
+
+
+
 
 if __name__ == "__main__":
 	app.run(host='0.0.0.0')
