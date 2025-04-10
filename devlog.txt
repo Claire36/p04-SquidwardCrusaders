@@ -30,3 +30,7 @@ benR -- 2025-04-07 20:05
 
 lindaZ -- 2025-04-09 01:20
 - Able to deploy flask app on testing droplet
+
+claireS -- 2025-04-09 23:00
+- Added navbar, and login & register buttons to homepage
+- Upload datasets
