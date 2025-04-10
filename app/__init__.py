@@ -5,6 +5,7 @@ import db
 import geopandas as gpd
 import json
 import matplotlib.pyplot as plt
+import test
 
 DB_FILE = "db.py"
 app = Flask(__name__)
@@ -25,19 +26,24 @@ def map():
 
 @app.route('/test')
 def test_path():
+    return render_template("test.html")
+
+@app.route('/geojson')
+def get_geojson():
     with open('../counties.geojson', 'r') as f:
         geojson_data = json.load(f)
 
-        # Convert the GeoJSON to a GeoDataFrame using GeoPandas
-        gdf = gpd.GeoDataFrame.from_features(geojson_data['features'])
+    lookup = build_county_lookup('../counties.geojson')
+    raw_shades = load_county_shades('state_data.csv', lookup)
+    norm_shades = normalize_shades(raw_shades)
 
-        # Check the first few rows to understand the structure
-        print(gdf.head())
+    for feature in geojson_data['features']:
+        geoid = feature['properties']['GEOID']
+        shade = norm_shades.get(geoid, 0.5)  # Mid-gray default
+        feature['properties']['shade'] = shade
 
-        # Optionally: Plot the GeoDataFrame
-        gdf.plot()
-        plt.show()
-    return render_template("test.html")
+    return jsonify(geojson_data)
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
