@@ -30,3 +30,6 @@ benR -- 2025-04-07 20:05
 
 lindaZ -- 2025-04-09 01:20
 - Able to deploy flask app on testing droplet
+
+lindaZ -- 2025-04-10 10:32
+- Sucessfully created a prelimenary chloropleth path using d3.js on flask app
