@@ -22,7 +22,11 @@ def root():
 
 @app.route('/map')
 def map():
-    return render_template('map.html')
+    return render_template('line.html')
+
+@app.route('/test')
+def test():
+    return render_template('test.html')
 
 @app.route('/test')
 def test_path():
