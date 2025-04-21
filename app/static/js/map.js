@@ -98,6 +98,8 @@ d3.queue()
   .await(ready);
 
 var ind = 2000;
+var progBar = document.getElementById('progress-bar');
+var progress = 0.0;
 function ready(error, topo) {
   // Draw the map
   svg.append("g")
@@ -117,6 +119,10 @@ function ready(error, topo) {
       .attr("stroke", "black");
     year(ind);
     ind = ind+1;
+    progress = (ind-2001)/23.0*100;
+    if (progress < 101) {
+        progBar.style.width = "" + progress + "%";
+    }
     }
 
 function year(text) {

@@ -49,7 +49,7 @@ def compare():
         city = request.form['cities']
         county = request.form['counties']
         pollutant = request.form['pollutants']
-        render_template('compare.html', city=city, county=county, pollutant=pollutant, congestions=conglist, pollutions=polllist)
+        return render_template('compare.html', city=city, county=county, pollutant=pollutant, congestions=conglist, pollutions=polllist)
     return render_template('compare.html', congestions=conglist, pollutions=polllist)
 
 '''

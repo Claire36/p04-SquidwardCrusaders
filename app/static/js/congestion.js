@@ -87,6 +87,7 @@ d3.queue()
   .await(ready);
 
 //var ind = 1982;
+
 function ready(error, topo) {
   // Draw the map
   svg.append("g")
@@ -168,6 +169,8 @@ function animate3() {
 }
 
 var yr = 1985;
+var progBar = document.getElementById('progress-bar');
+var progress = 0.0;
 function animate4(yr) {
 	year(yr)
         d3.queue()
@@ -177,6 +180,10 @@ function animate4(yr) {
 		  //data.get(d["Urban_area"])
                                                                })
           .await(ready);
+	progress = (yr-1982)/28.0*100;
+	if (progress < 101) {
+		progBar.style.width = "" + progress + "%";
+	}
 	if (yr==1982) {
 		yr = yr+3;
 	} else if (yr<2000) {

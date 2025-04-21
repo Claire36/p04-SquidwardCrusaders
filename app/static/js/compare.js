@@ -29,7 +29,7 @@ d3.csv("../static/congestion_filtered_transposed.csv",
     svg.append("g")
       .call(d3.axisLeft(y));
 
-var city = document.getElementById("city").textContent;
+    var city = document.getElementById("city").textContent;
     // Add the line
     svg.append("path")
       .datum(data)
