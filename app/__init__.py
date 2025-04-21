@@ -65,10 +65,11 @@ def map_view(pollutant):
     if pollutant not in {"O3", "CO", "SO2", "NO2"} and pollutant != "congestion":
         abort(404)
     return render_template("map.html", pollutant=pollutant)
-'''
+
 @app.route('/map')
 def map():
     return render_template('line.html')
+'''
 
 @app.route('/test')
 def test():
@@ -82,6 +83,9 @@ def register():
         conn = get_db_connection()
         conn.execute("INSERT INTO users (username, password_hash) VALUES (?, ?)", (username, password))
         conn.commit()
+        conn.close()
+        return redirect('/login')
+    return render_template('register.html')
 '''
         try:
             conn.execute(
@@ -93,9 +97,6 @@ def register():
             conn.close()
             return render_template("register.html", error="Username taken")
 '''
-        conn.close()
-        return redirect('/login')
-    return render_template('register.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
