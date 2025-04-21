@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request, redirect, session, jsonify, abort
+from flask import Flask, render_template, url_for, request, redirect, session
 import sqlite3
 import hashlib
 from db import *
@@ -7,7 +7,6 @@ import functools, datetime
 
 app = Flask(__name__)
 app.secret_key = 'SquidwardT'
-DB = "data.db"
 
 congestion = open("static/congestion_filtered_transposed.csv", "r")
 congestion = congestion.readlines()[0].strip().split(",")[1:]
@@ -22,20 +21,12 @@ for x in pollution:
     polllist.append(x)
 
 # ─────────────────────────────  helpers ──────────────────────────────
+'''
 def get_db_connection():
     conn = sqlite3.connect('data.db')
     conn.row_factory = sqlite3.Row
     return conn
-
-def login_required(view):
-    @functools.wraps(view)
-    def wrapped(*args, **kwargs):
-        if "user_id" not in session:
-            return redirect(url_for("login", next=request.path))
-        return view(*args, **kwargs)
-    return wrapped
-
-# ─────────────────────────────  routes  ──────────────────────────────
+'''
 @app.route('/')
 def root():
     return render_template('home.html')
@@ -75,17 +66,19 @@ def map_view(pollutant):
         abort(404)
     return render_template("map.html", pollutant=pollutant)
 '''
+@app.route('/map')
+def map():
+    return render_template('line.html')
 
 @app.route('/test')
 def test():
     return render_template('test.html')
 
-# --------------------  auth  -------------------
-@app.route("/register", methods=["GET", "POST"])
+@app.route('/register', methods=['GET', 'POST'])
 def register():
-    if request.method == "POST":
-        username = request.form["username"].strip()
-        pw_hash = hashlib.sha256(request.form["password"].encode()).hexdigest()
+    if request.method == 'POST':
+        username = request.form['username']
+        password = hashlib.sha256(request.form['password'].encode()).hexdigest()
         conn = get_db_connection()
         conn.execute("INSERT INTO users (username, password_hash) VALUES (?, ?)", (username, password))
         conn.commit()
@@ -101,19 +94,16 @@ def register():
             return render_template("register.html", error="Username taken")
 '''
         conn.close()
-        return redirect("/login")
-    return render_template("register.html")
+        return redirect('/login')
+    return render_template('register.html')
 
-@app.route("/login", methods=["GET", "POST"])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    if request.method == "POST":
-        username = request.form["username"]
-        pw_hash = hashlib.sha256(request.form["password"].encode()).hexdigest()
+    if request.method == 'POST':
+        username = request.form['username']
+        password = hashlib.sha256(request.form['password'].encode()).hexdigest()
         conn = get_db_connection()
-        user = conn.execute(
-            "SELECT * FROM users WHERE username = ? AND password_hash = ?",
-            (username, pw_hash),
-        ).fetchone()
+        user = conn.execute("SELECT * FROM users WHERE username = ? and password_hash = ?", (username, password)).fetchone()
         conn.close()
         if user:
             session['user_id'] = user['id']
@@ -126,26 +116,30 @@ def login():
     return render_template("login.html")
 '''
 
-@app.route("/logout")
+@app.route('/logout')
 def logout():
     session.clear()
     return redirect("/login")
 '''
 # --------------------  data APIs  --------------------
 @app.route("/data/<pollutant>")
+=======
+    return redirect('/login')
+
+@app.route('/map/<pollutant>')
+def map_view(pollutant):
+    return render_template('map.html', pollutant=pollutant)
+
+@app.route('/data/<pollutant>')
+>>>>>>> 9a1236d20d633912e418bac834ce97968f05775f
 def data_api(pollutant):
     conn = get_db_connection()
-    if pollutant == "congestion":
-        rows = conn.execute(
-            "SELECT year, state, congestion_index AS value FROM congestion ORDER BY year"
-        ).fetchall()
-    else:
-        rows = conn.execute(
-            "SELECT year, state, value FROM airQuality WHERE pollutant = ? ORDER BY year",
-            (pollutant,),
-        ).fetchall()
+    data = conn.execute(
+        "SELECT year, state, value FROM airQuality WHERE pollutant = ? ORDER BY year",
+        (pollutant,)
+    ).fetchall()
     conn.close()
-    return jsonify(data=[dict(r) for r in rows])
+    return {'data': [dict(row) for row in data]}
 
 @app.route('/congestion_data')
 def congestion_api():
@@ -154,6 +148,7 @@ def congestion_api():
     conn.close()
     return {'data': [dict(row) for row in data]}
 
+<<<<<<< HEAD
 # --------------------  like / comment APIs  --------------------
 @app.route("/api/likes/<graph_slug>", methods=["GET", "POST"])
 @login_required
