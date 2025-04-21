@@ -38,6 +38,12 @@ claireS -- 2025-04-09 23:00
 lindaZ -- 2025-04-10 10:32
 - Sucessfully created a prelimenary chloropleth path using d3.js on flask app
 
+benR -- 2025-04-21 10:40
+- Overhauled init.py file with like + comments updates
+- Added login required routes]
+- structuring]
+- fixed auth routes
+
 DESIGN REVISIONS THUS FAR:
 - Added link for GeoJSON data of US counties for our choropleth maps
 - Revised the task breakdown
