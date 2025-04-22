@@ -190,7 +190,7 @@ function animate4(yr) {
 	
 	yr++;
 	if (yr < 2024) {
-		setTimeout(animate4, 1000, yr);
+		setTimeout(animate4, 800, yr);
 	}
 }
 
