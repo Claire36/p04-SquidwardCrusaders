@@ -4,9 +4,6 @@ from datetime import datetime
 
 DB_FILE = "data.db"
 
-import_pollution_data("pollution_2000_2023.csv")
-import_congestion_data("table_01_71q113.csv")
-
 def import_pollution_data(filepath):
     db = sqlite3.connect(DB_FILE, check_same_thread=False)
     c = db.cursor()
@@ -14,7 +11,8 @@ def import_pollution_data(filepath):
     c.execute("CREATE TABLE IF NOT EXISTS comments (id INTEGER PRIMARY KEY, username TEXT, content TEXT, map TEXT);")
     c.execute("CREATE TABLE IF NOT EXISTS airQuality (id INTEGER PRIMARY KEY, pollutant TEXT, value REAL, state TEXT, year INTEGER, userID INTEGER);")
     c.execute("CREATE TABLE IF NOT EXISTS congestion (id INTEGER PRIMARY KEY, congestion_index REAL, state TEXT, userID INTEGER, year INTEGER);")
-
+    db.commit()
+    db.close()
 '''
     with open(filepath, newline='') as f:
         reader = csv.DictReader(f)
@@ -87,5 +85,5 @@ def import_congestion_data(filepath):
         except Exception as e:
             print(f"Error in row {row[0]}: {e}")
 '''
-    db.commit()
-    db.close()
+import_pollution_data("static/pollution_2000_2023.csv")
+#import_congestion_data("static/table_01_71q113.csv")

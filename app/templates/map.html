@@ -79,14 +79,30 @@
 <div>
 	<div class="bg-stone-300 my-8 mx-32 p-8 border-stone-800 border-2 rounded-lg">
 		<h1>Map of {{pollutant}} Levels</h1>
-		<div id="my_dataviz"></div>
-		<script id="myScript"></script>
-		<script>
-			var url="../static/js/";
-			var extra="map.js";
-			var extra1="{{pollutant}}map.js";
-			document.getElementById('myScript').src=url+extra;
-		</script>
+		<div class="flex space-x-30 items-start">
+			<div id="my_dataviz" class="w-1/2"></div>
+			<script id="myScript"></script>
+			<script>
+				var url="../static/js/";
+				var extra="map.js";
+				var extra1="{{pollutant}}map.js";
+				document.getElementById('myScript').src=url+extra;
+			</script>
+			<div class="w-1/6"></div>
+			<div class="bg-stone-400 w-1/3 justify-left overflow-hidden rounded p-4 mr-10 mt-10">
+				{% if pollutant=="O3" %}
+					<h1>"Ozone at ground level is a harmful air pollutant formed when sunlight reacts with pollutants like nitrogen oxides (NOₓ) and volatile organic compounds (VOCs) from vehicles and industrial sources. While ozone high in the atmosphere protects us from UV radiation, ground-level ozone can irritate the lungs, worsen asthma, and reduce lung function. It also harms crops and ecosystems by interfering with plant growth." -from chatgbt</h1>
+				{% elif pollutant=="CO" %}
+					<h1>"Carbon monoxide is a colorless, odorless gas produced by burning fossil fuels, especially from cars, stoves, and furnaces. It’s dangerous because it interferes with the blood's ability to carry oxygen, which can lead to dizziness, headaches, or even death in high concentrations. CO is particularly harmful in enclosed spaces and poses a serious health risk to people with heart conditions." -from chatgbt</h1>
+				{% elif pollutant=="SO2" %}
+					<h1>"Sulfur dioxide is a sharp-smelling gas primarily released from burning coal or oil at power plants and by industrial processes. It can irritate the respiratory system, triggering asthma and other lung conditions. SO₂ also contributes to acid rain, which damages forests, soils, and bodies of water, and accelerates the decay of buildings and monuments." -from chatgbt</h1>
+				{% elif pollutant=="NO2" %}
+					<h1>"Nitrogen Dioxide (NO₂) is a reddish-brown gas and one of the major air pollutants commonly associated with vehicle emissions, industrial processes, and the burning of fossil fuels. It is part of the nitrogen oxides (NOₓ) group and plays a significant role in the formation of ground-level ozone and fine particulate matter (PM2.5), both of which pose serious health risks. Short-term exposure to elevated NO₂ levels can irritate the respiratory system, particularly for people with asthma, while long-term exposure may contribute to the development of respiratory infections and reduced lung function. NO₂ is also a key contributor to environmental issues like acid rain and the deterioration of air quality in urban areas." -from chatgbt</h1>
+				{% else %}
+					<h1>no data avaliable</h1>
+				{% endif %}
+			</div>
+		</div>
 	</div>
 </div>
 <div class="flex justify-center">
