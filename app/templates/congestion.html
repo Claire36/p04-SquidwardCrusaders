@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8">
+	<script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+        <script src="https://d3js.org/topojson.v2.min.js"></script>
+</head>
+<body class="bg-blue-100">
+		<nav class="bg-slate-100 border-gray-200">
+  			<div class="border-2 flex flex-wrap items-center justify-between p-4">
+      				<ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white">
+        				<li>
+          					<a href="/" class="block py-2 px-3 text-black bg-slate-100">Home</a>
+        				</li>
+					<li>
+						<a href="/register" class="block py-2 px-3 text-black bg-slate-100">Register</a>
+					</li>
+        				<li>
+          					<a href="/login" class="block py-2 px-3 text-black bg-slate-100">Login</a>
+        				</li>
+        				<li>
+          					<a href="/pollution/O3" class="block py-2 px-3 text-black bg-slate-100">O3 Map</a>
+        				</li>
+        				<li>
+          					<a href="/pollution/CO" class="block py-2 px-3 text-black bg-slate-100">CO Map</a>
+        				</li>
+        				<li>
+          					<a href="/pollution/SO2" class="block py-2 px-3 text-black bg-slate-100">SO2 Map</a>
+        				</li>
+        				<li>
+          					<a href="/pollution/NO2" class="block py-2 px-3 text-black bg-slate-100">NO2 Map</a>
+        				</li>
+					<li>
+						<a href="/congestion" class="block py-2 px-3 text-blue-500 bg-slate-100">Congestion</a>
+					</li>
+					<li>
+						<a href="/compare" class="block py-2 px-3 text-black bg-slate-100">Compare</a>
+					</li>
+					<li>
+						<a href="/logout" class="block py-2 px-3 text-black bg-slate-100">Log Out</a>
+					</li>
+      				</ul>
+    			</div>
+  		</nav>
+<h1>Congestion</h1>
+<div class="grid grid-cols-3 gap-4 items-center pt-8">
+	<div class="col-start-2"><button class="bg-blue-500 text-white fond-bold py-2 px-4 rounded-full" onclick="animate4(1982)">Click</button></div>
+	<div id="year" class="col-start-3">Year: 1982</div>
+	<div class="col-start-3 w-1/2 bg-gray-400 rounded-full dark:bg-gray-700">
+		<div id="progress-bar" class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full" style="width: 0%"></div>
+	</div>
+</div>
+<div>
+	<div class="bg-stone-300 my-8 mx-32 p-8 border-stone-800 border-2 rounded-lg">
+		<h1>Map of Roadway Congestion Index*</h1>
+		<div id="my_dataviz"></div>
+		<script src="../static/js/congestion.js"></script>
+		<p>*These values are from the Bureau of Transportation Statistics. The Roadway Congestion Index is a measure of traffic density on major roadways.</p>
+	</div>
+</div>
+</body>

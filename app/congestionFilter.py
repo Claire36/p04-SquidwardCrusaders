@@ -15,7 +15,7 @@ df["Urban_area"] = df["Urban_area"].str.upper()
 years = [1982, 1985, 1990, 1995] + list(range(2000, 2012))
 
 for year in years:
-        df[str(year)] = df[str(year)].astype(str).str.replace("(R) ", "", regex=False)
+	df[str(year)] = df[str(year)].astype(str).str.replace("(R) ", "", regex=False)
 
 df.to_csv("static/congestion_filtered.csv", index=False)
 
