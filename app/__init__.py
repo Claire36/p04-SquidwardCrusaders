@@ -27,11 +27,11 @@ def get_db_connection():
 
 @app.route('/')
 def root():
-    return render_template('home.html')
+    return render_template('home.html', user=session.get('username'))
 
-@app.route('/map/O3')
-def map():
-    return render_template('map.html')
+# @app.route('/map/O3')
+# def map():
+#     return render_template('map.html')
 
 @app.route('/pollution/<pollutant>', methods=['GET', 'POST'])
 def pollution(pollutant):
@@ -48,11 +48,11 @@ def pollution(pollutant):
     conn = get_db_connection()
     comments = conn.execute("SELECT * FROM comments WHERE map = ?", (pollutant,)).fetchall()
     conn.close()
-    return render_template('map.html', pollutant=pollutant, comments=comments)
+    return render_template('map.html', pollutant=pollutant, comments=comments, user=session.get('username'))
 
 @app.route('/congestion')
 def congestion():
-    return render_template('congestion.html')
+    return render_template('congestion.html', user=session.get('username'))
 
 @app.route('/compare', methods=['GET', 'POST'])
 def compare():
@@ -61,7 +61,7 @@ def compare():
         county = request.form['counties']
         pollutant = request.form['pollutants']
         return render_template('compare.html', city=city, county=county, pollutant=pollutant, congestions=conglist, pollutions=polllist)
-    return render_template('compare.html', congestions=conglist, pollutions=polllist)
+    return render_template('compare.html', congestions=conglist, pollutions=polllist, user=session.get('username'))
 
 @app.route('/test')
 def test():

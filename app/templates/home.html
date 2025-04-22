@@ -34,9 +34,14 @@
 					<li>
 						<a href="/compare" class="block py-2 px-3 text-black bg-slate-100">Compare</a>
 					</li>
+					{%if user%}
+					<li>
+						<p class="block py-2 px-3 text-black bg-slate-100"> Hello {{user}}</p>
+					</li>
 					<li>
 						<a href="/logout" class="block py-2 px-3 text-black bg-slate-100">Log Out</a>
 					</li>
+					{%endif%}
       				</ul>
     			</div>
   		</nav>
@@ -60,11 +65,12 @@
 				<p class="text-lg p-8">Air pollutants trap heat in the atmosphere, contributing to higher temperatures, more extreme weather, and rising sea levels.</p>
 			</div>
 		</div>
-		
+		{%if user is not defined or not user%}
 		<div class="flex justify-center">
 			<a href="/login"><button class="bg-blue-700 text-white p-2 m-2 rounded">Log in</button></a>
 			<a href="/register"><button class="bg-blue-700 text-white p-2 m-2 rounded">Sign up</button></a>
 		</div>
+		{%endif%}
 <!--
 		<div class="flex items-center">
 			<a href="http://167.71.30.220/map"><img src="https://gasdetection.com/app/uploads/2024/02/Sulfur-Dioxide.jpg.webp" alt="Sulfur dioxide" style="width:1000px"></a>
