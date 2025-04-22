@@ -66,8 +66,8 @@
       				</ul>
     			</div>
   		</nav>
-<h1 id="pollutant">{{pollutant}}</h1>
-<div class="grid grid-cols-3 gap-4 items-center pt-8">
+<h1 id="pollutant" class="text-blue-100">{{pollutant}}</h1>
+<div class="bg-grid grid-cols-3 gap-4 items-center pt-8">
 	<div class="col-start-2"><button class="bg-blue-500 text-white fond-bold py-2 px-4 rounded-full" onclick="animate4(2000)">Click</button></div>
 	<div id="year" class="col-start-3">Year: </div>
 	<div class="col-start-3 w-1/2 bg-gray-400 rounded-full dark:bg-gray-700">
@@ -78,7 +78,7 @@
 <div>
 	<div class="bg-stone-300 my-8 mx-32 p-8 border-stone-800 border-2 rounded-lg">
 		<h1>Map of {{pollutant}} Levels</h1>
-		<div class="flex space-x-30 items-start">
+		<div class="flex space-x-30 space-h-10 items-start grid grid-flow-col">
 			<div id="my_dataviz" class="w-1/2"></div>
 			<script id="myScript"></script>
 			<script>
@@ -88,18 +88,29 @@
 				document.getElementById('myScript').src=url+extra;
 			</script>
 			<div class="w-1/6"></div>
-			<div class="bg-stone-400 w-1/3 justify-left overflow-hidden rounded p-4 mr-10 mt-10">
-				{% if pollutant=="O3" %}
-					<h1>"Ozone at ground level is a harmful air pollutant formed when sunlight reacts with pollutants like nitrogen oxides (NOₓ) and volatile organic compounds (VOCs) from vehicles and industrial sources. While ozone high in the atmosphere protects us from UV radiation, ground-level ozone can irritate the lungs, worsen asthma, and reduce lung function. It also harms crops and ecosystems by interfering with plant growth." -from chatgbt</h1>
-				{% elif pollutant=="CO" %}
-					<h1>"Carbon monoxide is a colorless, odorless gas produced by burning fossil fuels, especially from cars, stoves, and furnaces. It’s dangerous because it interferes with the blood's ability to carry oxygen, which can lead to dizziness, headaches, or even death in high concentrations. CO is particularly harmful in enclosed spaces and poses a serious health risk to people with heart conditions." -from chatgbt</h1>
-				{% elif pollutant=="SO2" %}
-					<h1>"Sulfur dioxide is a sharp-smelling gas primarily released from burning coal or oil at power plants and by industrial processes. It can irritate the respiratory system, triggering asthma and other lung conditions. SO₂ also contributes to acid rain, which damages forests, soils, and bodies of water, and accelerates the decay of buildings and monuments." -from chatgbt</h1>
-				{% elif pollutant=="NO2" %}
-					<h1>"Nitrogen Dioxide (NO₂) is a reddish-brown gas and one of the major air pollutants commonly associated with vehicle emissions, industrial processes, and the burning of fossil fuels. It is part of the nitrogen oxides (NOₓ) group and plays a significant role in the formation of ground-level ozone and fine particulate matter (PM2.5), both of which pose serious health risks. Short-term exposure to elevated NO₂ levels can irritate the respiratory system, particularly for people with asthma, while long-term exposure may contribute to the development of respiratory infections and reduced lung function. NO₂ is also a key contributor to environmental issues like acid rain and the deterioration of air quality in urban areas." -from chatgbt</h1>
-				{% else %}
-					<h1>no data avaliable</h1>
-				{% endif %}
+			<div class="grid grid-row-2">
+
+				<div class="bg-stone-400 w-1/2 justify-left overflow-hidden rounded p-4 mr-10 mt-10 ml-20 row-span-1">
+					{% if pollutant=="O3" %}
+						<h1>"Ozone at ground level is a harmful air pollutant formed when sunlight reacts with pollutants like nitrogen oxides (NOₓ) and volatile organic compounds (VOCs) from vehicles and industrial sources. While ozone high in the atmosphere protects us from UV radiation, ground-level ozone can irritate the lungs, worsen asthma, and reduce lung function. It also harms crops and ecosystems by interfering with plant growth." -from chatgbt</h1>
+					{% elif pollutant=="CO" %}
+						<h1>"Carbon monoxide is a colorless, odorless gas produced by burning fossil fuels, especially from cars, stoves, and furnaces. It’s dangerous because it interferes with the blood's ability to carry oxygen, which can lead to dizziness, headaches, or even death in high concentrations. CO is particularly harmful in enclosed spaces and poses a serious health risk to people with heart conditions." -from chatgbt</h1>
+					{% elif pollutant=="SO2" %}
+						<h1>"Sulfur dioxide is a sharp-smelling gas primarily released from burning coal or oil at power plants and by industrial processes. It can irritate the respiratory system, triggering asthma and other lung conditions. SO₂ also contributes to acid rain, which damages forests, soils, and bodies of water, and accelerates the decay of buildings and monuments." -from chatgbt</h1>
+					{% elif pollutant=="NO2" %}
+						<h1>"Nitrogen Dioxide (NO₂) is a reddish-brown gas and one of the major air pollutants commonly associated with vehicle emissions, industrial processes, and the burning of fossil fuels. It is part of the nitrogen oxides (NOₓ) group and plays a significant role in the formation of ground-level ozone and fine particulate matter (PM2.5), both of which pose serious health risks. Short-term exposure to elevated NO₂ levels can irritate the respiratory system, particularly for people with asthma, while long-term exposure may contribute to the development of respiratory infections and reduced lung function. NO₂ is also a key contributor to environmental issues like acid rain and the deterioration of air quality in urban areas." -from chatgbt</h1>
+					{% else %}
+						<h1>no data avaliable</h1>
+					{% endif %}
+				</div>
+				<div class="bg-grid grid-cols-3 gap-4 items-center pt-8 row-start-2 row-end-3 ml-20">
+					<div class="col-start-2"><button class="bg-blue-500 text-white fond-bold py-2 px-4 rounded-full" onclick="animate4(2000)">Click</button></div>
+					<div id="year" class="col-start-3">Year: </div>
+					<div class="col-start-3 w-1/2 bg-gray-400 rounded-full dark:bg-gray-700">
+						<div id="progress-bar" class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full" style="width: 0%"></div>
+					</div>
+
+				</div>
 			</div>
 		</div>
 	</div>

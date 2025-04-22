@@ -2,6 +2,7 @@ from flask import Flask, render_template, url_for, request, redirect, session
 import sqlite3
 import hashlib
 from db import *
+setup()
 import functools, datetime
 
 app = Flask(__name__)
