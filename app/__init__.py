@@ -21,12 +21,11 @@ for x in pollution:
     polllist.append(x)
 
 # ─────────────────────────────  helpers ──────────────────────────────
-'''
 def get_db_connection():
     conn = sqlite3.connect('data.db')
     conn.row_factory = sqlite3.Row
     return conn
-'''
+
 @app.route('/')
 def root():
     return render_template('home.html')
@@ -35,9 +34,22 @@ def root():
 def map():
     return render_template('map.html')
 
-@app.route('/pollution/<pollutant>')
+@app.route('/pollution/<pollutant>', methods=['GET', 'POST'])
 def pollution(pollutant):
-    return render_template('map.html', pollutant=pollutant)
+    if 'username' not in session:
+        return redirect('/login')
+    if request.method == "POST":
+        content = request.form['comment']
+        user = session['username']
+        map = pollutant
+        conn = get_db_connection()
+        conn.execute("INSERT INTO comments (username, content, map) VALUES (?, ?, ?)", (user, content, map))
+        conn.commit()
+        conn.close()
+    conn = get_db_connection()
+    comments = conn.execute("SELECT * FROM comments WHERE map = ?", (pollutant,)).fetchall()
+    conn.close()
+    return render_template('map.html', pollutant=pollutant, comments=comments)
 
 @app.route('/congestion')
 def congestion():
@@ -107,7 +119,7 @@ def login():
         user = conn.execute("SELECT * FROM users WHERE username = ? and password_hash = ?", (username, password)).fetchone()
         conn.close()
         if user:
-            session['user_id'] = user['id']
+            session['username'] = user['username']
             return redirect('/')
     return render_template('login.html')
 '''

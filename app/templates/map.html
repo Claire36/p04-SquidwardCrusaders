@@ -89,4 +89,21 @@
 		</script>
 	</div>
 </div>
+<div class="flex justify-center">
+	<form action="" method="post">
+		<label for="comment">Write a comment:</label><br>
+		<textarea id="comment" name="comment" rows="5" cols="100"></textarea>
+		<br><br>
+		<button type="submit" class="b">Submit</button>
+	</form>
+</div>
+<div class="bg-white m-8">
+	{% for comment in comments %}
+	<div class="border-2 w-full px-8 py-2">
+		<h1>User: {{comment.username}}</h1>
+		<p>Comment: {{comment.content}}</p>
+	</div>
+	{% endfor %}
+
+</div>
 </body>
