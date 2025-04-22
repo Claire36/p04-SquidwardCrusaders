@@ -28,11 +28,11 @@ def get_db_connection():
 
 @app.route('/')
 def root():
-    return render_template('home.html')
+    return render_template('home.html', user=session.get('username'))
 
-@app.route('/map/O3')
-def map():
-    return render_template('map.html')
+# @app.route('/map/O3')
+# def map():
+#     return render_template('map.html')
 
 @app.route('/pollution/<pollutant>', methods=['GET', 'POST'])
 def pollution(pollutant):
@@ -49,11 +49,11 @@ def pollution(pollutant):
     conn = get_db_connection()
     comments = conn.execute("SELECT * FROM comments WHERE map = ?", (pollutant,)).fetchall()
     conn.close()
-    return render_template('map.html', pollutant=pollutant, comments=comments)
+    return render_template('map.html', pollutant=pollutant, comments=comments, user=session.get('username'))
 
 @app.route('/congestion')
 def congestion():
-    return render_template('congestion.html')
+    return render_template('congestion.html', user=session.get('username'))
 
 @app.route('/compare', methods=['GET', 'POST'])
 def compare():
@@ -62,26 +62,7 @@ def compare():
         county = request.form['counties']
         pollutant = request.form['pollutants']
         return render_template('compare.html', city=city, county=county, pollutant=pollutant, congestions=conglist, pollutions=polllist)
-    return render_template('compare.html', congestions=conglist, pollutions=polllist)
-
-'''
-app.route("/map")
-def map_landing():
-    # simple landing page that links to each pollutant map
-    pollutants = ["O3", "CO", "SO2", "NO2"]
-    return render_template("line.html", pollutants=pollutants)
-
-
-@app.route("/map/<pollutant>")
-def map_view(pollutant):
-    if pollutant not in {"O3", "CO", "SO2", "NO2"} and pollutant != "congestion":
-        abort(404)
-    return render_template("map.html", pollutant=pollutant)
-
-@app.route('/map')
-def map():
-    return render_template('line.html')
-'''
+    return render_template('compare.html', congestions=conglist, pollutions=polllist, user=session.get('username'))
 
 @app.route('/test')
 def test():
@@ -133,122 +114,6 @@ def login():
 def logout():
     session.clear()
     return redirect("/login")
-'''
-# --------------------  data APIs  --------------------
-@app.route("/data/<pollutant>")
-=======
-    return redirect('/login')
 
-@app.route('/map/<pollutant>')
-def map_view(pollutant):
-    return render_template('map.html', pollutant=pollutant)
-
-@app.route('/data/<pollutant>')
->>>>>>> 9a1236d20d633912e418bac834ce97968f05775f
-def data_api(pollutant):
-    conn = get_db_connection()
-    data = conn.execute(
-        "SELECT year, state, value FROM airQuality WHERE pollutant = ? ORDER BY year",
-        (pollutant,)
-    ).fetchall()
-    conn.close()
-    return {'data': [dict(row) for row in data]}
-
-@app.route('/congestion_data')
-def congestion_api():
-    conn = get_db_connection()
-    data = conn.execute("SELECT year, state, congestion_index FROM congestion ORDER BY year").fetchall()
-    conn.close()
-    return {'data': [dict(row) for row in data]}
-
-<<<<<<< HEAD
-# --------------------  like / comment APIs  --------------------
-@app.route("/api/likes/<graph_slug>", methods=["GET", "POST"])
-@login_required
-def likes_api(graph_slug):
-    conn = get_db_connection()
-    if request.method == "GET":
-        total = conn.execute(
-            "SELECT COUNT(*) FROM likes WHERE graph_slug = ?", (graph_slug,)
-        ).fetchone()[0]
-        user_liked = (
-            conn.execute(
-                "SELECT 1 FROM likes WHERE graph_slug = ? AND user_id = ?",
-                (graph_slug, session["user_id"]),
-            ).fetchone()
-            is not None
-        )
-        conn.close()
-        return jsonify({"total": total, "userLiked": user_liked})
-
-    # POST toggles like
-    already = conn.execute(
-        "SELECT id FROM likes WHERE graph_slug = ? AND user_id = ?",
-        (graph_slug, session["user_id"]),
-    ).fetchone()
-    if already:
-        conn.execute("DELETE FROM likes WHERE id = ?", (already["id"],))
-    else:
-        conn.execute(
-            "INSERT INTO likes (graph_slug, user_id, created_at) VALUES (?,?,?)",
-            (graph_slug, session["user_id"], datetime.datetime.utcnow()),
-        )
-    conn.commit()
-    conn.close()
-    return jsonify({"ok": True})
-
-
-@app.route("/api/comments/<graph_slug>", methods=["GET", "POST", "DELETE"])
-@login_required
-def comments_api(graph_slug):
-    conn = get_db_connection()
-    if request.method == "GET":
-        rows = conn.execute(
-            """
-            SELECT c.id, c.text, c.created_at, u.username
-            FROM comments c
-            JOIN users u ON c.user_id = u.id
-            WHERE c.graph_slug = ?
-            ORDER BY c.created_at DESC
-            """,
-            (graph_slug,),
-        ).fetchall()
-        conn.close()
-        return jsonify(
-            comments=[
-                {
-                    "id": r["id"],
-                    "text": r["text"],
-                    "author": r["username"],
-                    "created_at": r["created_at"],
-                    "mine": r["username"] == session.get("username"),
-                }
-                for r in rows
-            ]
-        )
-
-    if request.method == "POST":
-        text = request.json.get("text", "").strip()
-        if not text:
-            conn.close()
-            return jsonify({"error": "Empty"}), 400
-        conn.execute(
-            "INSERT INTO comments (graph_slug, user_id, text, created_at) VALUES (?,?,?,?)",
-            (graph_slug, session["user_id"], text, datetime.datetime.utcnow()),
-        )
-        conn.commit()
-        conn.close()
-        return jsonify({"ok": True})
-
-    # DELETE – only owner may delete
-    comment_id = request.json.get("id")
-    conn.execute(
-        "DELETE FROM comments WHERE id = ? AND user_id = ?",
-        (comment_id, session["user_id"]),
-    )
-    conn.commit()
-    conn.close()
-    return jsonify({"ok": True})
-'''
 if __name__ == "__main__":
 	app.run(host='0.0.0.0')

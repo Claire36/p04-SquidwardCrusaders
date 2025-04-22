@@ -1,66 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<script src="https://cdn.tailwindcss.com"></script>
-        <script src="https://d3js.org/d3.v4.min.js"></script>
-        <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-        <script src="https://d3js.org/topojson.v2.min.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+  <script src="https://d3js.org/topojson.v2.min.js"></script>
+  <title>Register</title>
 </head>
-<body class="bg-blue-100">
-		<nav class="bg-slate-100 border-gray-200">
-  			<div class="border-2 flex flex-wrap items-center justify-between p-4">
-      				<ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white">
-        				<li>
-          					<a href="/" class="block py-2 px-3 text-black bg-slate-100">Home</a>
-        				</li>
-					<li>
-						<a href="/register" class="block py-2 px-3 text-blue-500 bg-slate-100">Register</a>
-					</li>
-        				<li>
-          					<a href="/login" class="block py-2 px-3 text-black bg-slate-100">Login</a>
-        				</li>
-        				<li>
-          					<a href="/pollution/O3" class="block py-2 px-3 text-black bg-slate-100">O3 Map</a>
-        				</li>
-        				<li>
-          					<a href="/pollution/CO" class="block py-2 px-3 text-black bg-slate-100">CO Map</a>
-        				</li>
-        				<li>
-          					<a href="/pollution/SO2" class="block py-2 px-3 text-black bg-slate-100">SO2 Map</a>
-        				</li>
-        				<li>
-          					<a href="/pollution/NO2" class="block py-2 px-3 text-black bg-slate-100">NO2 Map</a>
-        				</li>
-					<li>
-						<a href="/congestion" class="block py-2 px-3 text-black bg-slate-100">Congestion</a>
-					</li>
-					<li>
-						<a href="/compare" class="block py-2 px-3 text-black bg-slate-100">Compare</a>
-					</li>
-					<li>
-						<a href="/logout" class="block py-2 px-3 text-black bg-slate-100">Log Out</a>
-					</li>
-      				</ul>
-    			</div>
-  		</nav>
+<body class="bg-blue-100 text-gray-800">
 
-	<div>
-		<h3>Register</h3>
-		<form action="/register" method="post">
-			<label for="username">Username:</label>
-			<input type="text" id="username" name="username">
-			<br><br>
-			<label for="password">Password:</label>
-			<input type="password" id="password" name="password">
-			<br><br>
-			<button type="submit" class="b">Sign Up</button>
-		</form>
-		<br><br>
-		<div>
-			<p>Already have an account? <a href="/login">Log In</a></p>
-		</div>
-	</div>
+  <!-- nav -->
+  <nav class="bg-white shadow-md border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+      <ul class="flex flex-wrap gap-4 text-sm font-medium">
+        <li><a href="/" class="hover:text-blue-700">Home</a></li>
+        <li><a href="/pollution/O3" class="hover:text-blue-700">O3 Map</a></li>
+        <li><a href="/pollution/CO" class="hover:text-blue-700">CO Map</a></li>
+        <li><a href="/pollution/SO2" class="hover:text-blue-700">SO2 Map</a></li>
+        <li><a href="/pollution/NO2" class="hover:text-blue-700">NO2 Map</a></li>
+        <li><a href="/congestion" class="hover:text-blue-700">Congestion</a></li>
+        <li><a href="/compare" class="hover:text-blue-700">Compare</a></li>
+        {% if user %}
+        <li><a href="/logout" class="hover:text-red-600">Log Out</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+
+  <!-- reg form -->
+  <div class="flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-xl shadow-md w-full max-w-md border-2 border-blue-200">
+      <h3 class="text-2xl font-semibold mb-6 text-center">Create Account</h3>
+
+      <form action="/register" method="post" class="space-y-4">
+        <div>
+          <label for="username" class="block mb-1 font-medium">Username:</label>
+          <input type="text" id="username" name="username" required
+                 class="w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
+        </div>
+
+        <div>
+          <label for="password" class="block mb-1 font-medium">Password:</label>
+          <input type="password" id="password" name="password" required
+                 class="w-full border border-gray-300 px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
+        </div>
+
+        <div class="text-center">
+          <button type="submit"
+                  class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg shadow">
+            Sign Up
+          </button>
+        </div>
+      </form>
+
+      <p class="text-center text-sm mt-6">
+        Already have an account?
+        <a href="/login" class="text-blue-600 hover:underline">Log In</a>
+      </p>
+    </div>
+  </div>
 
 </body>
 </html>

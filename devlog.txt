@@ -47,6 +47,10 @@ benR -- 2025-04-21 10:40
 claireS -- 2025-04-21 20:51
 - Commit maps & graphs
 
+lindaZ -- 2025-04-21 23:25
+- Fixed indent issues with __init__.py
+- Added subtext to each of pollution maps
+
 DESIGN REVISIONS THUS FAR:
 - Added link for GeoJSON data of US counties for our choropleth maps
 - Revised the task breakdown
