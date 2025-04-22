@@ -1,13 +1,7 @@
 from flask import Flask, render_template, url_for, request, redirect, session
 import sqlite3
 import hashlib
-import db
-import geopandas as gpd
-import json
-import matplotlib.pyplot as plt
-import test
 
-DB_FILE = "db.py"
 app = Flask(__name__)
 app.secret_key = 'SquidwardT'
 
@@ -27,27 +21,6 @@ def map():
 @app.route('/test')
 def test():
     return render_template('test.html')
-
-@app.route('/test')
-def test_path():
-    return render_template("test.html")
-
-@app.route('/geojson')
-def get_geojson():
-    with open('../counties.geojson', 'r') as f:
-        geojson_data = json.load(f)
-
-    lookup = build_county_lookup('../counties.geojson')
-    raw_shades = load_county_shades('state_data.csv', lookup)
-    norm_shades = normalize_shades(raw_shades)
-
-    for feature in geojson_data['features']:
-        geoid = feature['properties']['GEOID']
-        shade = norm_shades.get(geoid, 0.5)  # Mid-gray default
-        feature['properties']['shade'] = shade
-
-    return jsonify(geojson_data)
-
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -99,9 +72,6 @@ def congestion_api():
     data = conn.execute("SELECT year, state, congestion_index FROM congestion ORDER BY year").fetchall()
     conn.close()
     return {'data': [dict(row) for row in data]}
-
-
-
 
 if __name__ == "__main__":
 	app.run(host='0.0.0.0')
