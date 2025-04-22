@@ -13,12 +13,6 @@
         				<li>
           					<a href="/" class="block py-2 px-3 text-black bg-slate-100">Home</a>
         				</li>
-					<li>
-						<a href="/register" class="block py-2 px-3 text-black bg-slate-100">Register</a>
-					</li>
-        				<li>
-          					<a href="/login" class="block py-2 px-3 text-black bg-slate-100">Login</a>
-        				</li>
 					{% if pollutant=="O3" %}
         				<li>
           					<a href="/pollution/O3" class="block py-2 px-3 text-blue-500 bg-slate-100">O3 Map</a>
@@ -61,9 +55,14 @@
 					<li>
 						<a href="/compare" class="block py-2 px-3 text-black bg-slate-100">Compare</a>
 					</li>
+					{%if user%}
+					<li>
+						<p class="block py-2 px-3 text-black bg-slate-100"> Hello {{user}}</p>
+					</li>
 					<li>
 						<a href="/logout" class="block py-2 px-3 text-black bg-slate-100">Log Out</a>
 					</li>
+					{%endif%}
       				</ul>
     			</div>
   		</nav>
