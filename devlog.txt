@@ -44,6 +44,9 @@ benR -- 2025-04-21 10:40
 - structuring]
 - fixed auth routes
 
+claireS -- 2025-04-21 20:51
+- Commit maps & graphs
+
 DESIGN REVISIONS THUS FAR:
 - Added link for GeoJSON data of US counties for our choropleth maps
 - Revised the task breakdown
