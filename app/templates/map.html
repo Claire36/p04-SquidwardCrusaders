@@ -40,6 +40,11 @@
   <!-- title & controls -->
   <header class="max-w-4xl mx-auto mt-10 px-4 text-center">
     <h1 id="pollutant" class="text-4xl font-bold text-blue-700">{{ pollutant }}</h1>
+    {% if pollutant=="NO2" or pollutant=="SO2"%}
+        <h1 class="text-2xl text-blue-700">In parts per billion</h1>
+    {% else %}
+        <h1 class="text-2xl text-blue-700">In parts per million</h1>
+    {% endif %}
 
     <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
       <button onclick="animate4(2000)"
@@ -60,7 +65,7 @@
 
   <!-- map -->
   <section class="max-w-7xl mx-auto mt-12 px-4">
-    <div id="my_dataviz" class="w-full h-[500px] border border-gray-300 rounded-2xl shadow"></div>
+    <div id="my_dataviz" class="w-full h-[600px] border border-gray-300 rounded-2xl shadow"></div>
   </section>
 
   <!-- pollutant description -->
