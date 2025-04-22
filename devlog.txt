@@ -38,6 +38,9 @@ claireS -- 2025-04-09 23:00
 lindaZ -- 2025-04-10 10:32
 - Sucessfully created a prelimenary chloropleth path using d3.js on flask app
 
+claireS -- 2025-04-15 19:00
+- Created pollution and congestion maps
+
 benR -- 2025-04-21 10:40
 - Overhauled init.py file with like + comments updates
 - Added login required routes]
@@ -45,12 +48,34 @@ benR -- 2025-04-21 10:40
 - fixed auth routes
 
 claireS -- 2025-04-21 20:51
-- Commit maps & graphs
+- Created line graphs for pollution vs congestion
+- Added comments
 
 lindaZ -- 2025-04-21 23:25
 - Fixed indent issues with __init__.py
 - Added subtext to each of pollution maps
 
+benR -- 2025-04-22 15:58
+- Edited HTML & CSS of map pages
+
+claireS -- 2025-04-22 19:27
+- Finishing touches to CSS
+
 DESIGN REVISIONS THUS FAR:
 - Added link for GeoJSON data of US counties for our choropleth maps
 - Revised the task breakdown
+
+HOME STRETCH CHECKLIST:
+------------------------------------
+* add comments to pollution maps :: Ben, Tanzeem
+* add additional info on pollutants :: Linda
+* reorganize the layout of the pages with maps :: Claire
+====================================
+
+### FEATURE SPOTLIGHT
+* animated pollution choropleths in lines 180-195 of app/static/js/map.js
+* color scale in lines 38-88 of app/static/js/map.js
+
+### KNOWN BUGS/ISSUES
+* can't animate one map twice without reloading the page
+* for places with low RCIs, line graphs dip below the x-axis on the compare page
