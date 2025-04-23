@@ -79,6 +79,7 @@ claireS -- 2025-04-22 19:27
 DESIGN REVISIONS THUS FAR:
 - Added link for GeoJSON data of US counties for our choropleth maps
 - Revised the task breakdown
+- Added new routes, program components
 
 HOME STRETCH CHECKLIST:
 ------------------------------------
