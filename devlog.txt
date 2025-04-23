@@ -10,6 +10,9 @@ claireS -- 2025-03-31 21:30
 tanzeemH -- 2025-03-31 23:10
 - Updated roles
 
+tanzeemH -- 2025-04-01 10:59
+- Worked on db setup
+
 benR -- 2025-04-01 11:45
 - Added basic flask routes and key passwords
 
@@ -23,6 +26,9 @@ lindaZ -- 2025-04-03 10:44
 - Created testing droplet and added users
 - Working on chloropleth maps using d3
 
+tanzeemH -- 2025-04-07 10:58
+- Created functions for congestion tables
+
 benR -- 2025-04-07 20:05
 - Added simple logout routes
 - Added a map view route to see certain pollutants and to see specific database
@@ -30,6 +36,9 @@ benR -- 2025-04-07 20:05
 
 lindaZ -- 2025-04-09 01:20
 - Able to deploy flask app on testing droplet
+
+tanzeemH -- 2025-04-09 10:55
+- Worked on rendering geojson file on website in test files
 
 claireS -- 2025-04-09 23:00
 - Added navbar, and login & register buttons to homepage
@@ -41,6 +50,9 @@ lindaZ -- 2025-04-10 10:32
 claireS -- 2025-04-15 19:00
 - Created pollution and congestion maps
 
+tanzeemH -- 2025-04-20 20:50
+- Removed conflicting material
+
 benR -- 2025-04-21 10:40
 - Overhauled init.py file with like + comments updates
 - Added login required routes]
@@ -50,6 +62,9 @@ benR -- 2025-04-21 10:40
 claireS -- 2025-04-21 20:51
 - Created line graphs for pollution vs congestion
 - Added comments
+
+tanzeemH -- 2025-04-21 20:50
+- Reorganized login/logout/register
 
 lindaZ -- 2025-04-21 23:25
 - Fixed indent issues with __init__.py
@@ -71,11 +86,3 @@ HOME STRETCH CHECKLIST:
 * add additional info on pollutants :: Linda
 * reorganize the layout of the pages with maps :: Claire
 ====================================
-
-### FEATURE SPOTLIGHT
-* animated pollution choropleths in lines 180-195 of app/static/js/map.js
-* color scale in lines 38-88 of app/static/js/map.js
-
-### KNOWN BUGS/ISSUES
-* can't animate one map twice without reloading the page
-* for places with low RCIs, line graphs dip below the x-axis on the compare page
